@@ -1,0 +1,22 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.venv/
+venv/
+env/
+
+# Streamlit cache
+.streamlit/
+
+# Data we can regenerate
+Dataset/raw/
+Dataset/tables/
+Dataset/features/
+Dataset/papers_index.csv
+Dataset/tables_index.csv
+Dataset/tables_index.xlsx
+
+# Large local PDFs (you can keep a few example ones if you want)
+Research_Paper/
