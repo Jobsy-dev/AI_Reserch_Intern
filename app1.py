@@ -460,8 +460,18 @@ with tab_row_details:
 
         # Show original table or page text
         if source_type == "table" and isinstance(row.get("source_csv"), str):
-            table_rel = row["source_csv"]
-            table_path = ROOT / table_rel
+            raw_rel = row["source_csv"]
+
+            # 🔧 Normalize Windows-style paths so they work on Linux too
+            table_rel = raw_rel.replace("\\", "/").lstrip("/")
+
+            # If it's already absolute, use it as-is; otherwise join with ROOT
+            rel_path = Path(table_rel)
+            if rel_path.is_absolute():
+                table_path = rel_path
+            else:
+                table_path = ROOT / rel_path
+
             st.write("**Full table from which this row was extracted:**")
             if table_path.exists():
                 try:
@@ -478,6 +488,7 @@ with tab_row_details:
                                     use_container_width=True,
                                 )
                         except Exception:
+                            # If row index cannot be cast or not found, just ignore
                             pass
                 except Exception as e:
                     st.warning(f"Could not read table CSV: {e}")
