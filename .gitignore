@@ -12,7 +12,7 @@ env/
 
 # Data we can regenerate
 Dataset/raw/
-Dataset/tables/
+#Dataset/tables/
 Dataset/features/
 Dataset/papers_index.csv
 Dataset/tables_index.csv
